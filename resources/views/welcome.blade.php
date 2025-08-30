@@ -55,8 +55,56 @@
         0%, 100% { opacity: 1; }
         50% { opacity: 0.5; }
     }
-</style>
 
+        .mobile-menu {
+            display: none;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        
+        .mobile-menu.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .gradient-btn {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            color: white;
+            padding: 10px 28px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 16px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(79, 70, 229, 0.3);
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .gradient-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(79, 70, 229, 0.4);
+        }
+        
+        .gradient-btn:active {
+            background: linear-gradient(135deg, #4338ca 0%, #6d28d9 100%);
+        }
+        
+        .hamburger-active span:first-child {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+        
+        .hamburger-active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .hamburger-active span:last-child {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+    </style>
 
 </head>
 
@@ -64,38 +112,54 @@
 
     <!-- Navigation -->
 <nav class="bg-white shadow-lg sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-20 items-center">
-            <div class="flex items-center">
-                <div class="flex-shrink-0">
-                    <img class="h-12 w-auto" src="{{ asset('images/logo.png') }}" alt="QuantumByte Technologies">
-                </div>
-                <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-6">
-                        <a href="#home" class="text-blue-600 hover:text-blue-800 px-3 py-2 rounded-md text-sm font-medium">Home</a>
-                        <a href="#about" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">About</a>
-                        <a href="#services" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Services</a>
-                        <a href="#history" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Our Journey</a>
-                        <a href="#contact" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <img class="h-12 w-auto" src="{{asset('images/logo.png')}}" alt="QuantumByte Technologies">
+                    </div>
+                    <div class="hidden md:block">
+                        <div class="ml-10 flex items-baseline space-x-6">
+                            <a href="#home" class="text-blue-600 hover:text-blue-800 px-3 py-2 rounded-md text-sm font-medium transition duration-300">Home</a>
+                            <a href="#about" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition duration-300">About</a>
+                            <a href="#services" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition duration-300">Services</a>
+                            <a href="#history" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition duration-300">Our Journey</a>
+                            <a href="#contact" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition duration-300">Contact</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="hidden md:block">
-                <div class="ml-4 flex items-center md:ml-6">
-                    <a href="#contact" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium transition duration-300">Get a Quote</a>
+                
+                <div class="hidden md:block">
+                    <div class="ml-4 flex items-center md:ml-6">
+                        <a href="#contact" class="gradient-btn">Sign in / Sign up</a>
+                    </div>
+                </div>
+                
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-blue-600 hover:bg-gray-100 focus:outline-none transition duration-300">
+                        <span class="sr-only">Open main menu</span>
+                        <span class="block w-6 h-0.5 bg-gray-700 mb-1 transition-all duration-300"></span>
+                        <span class="block w-6 h-0.5 bg-gray-700 mb-1 transition-all duration-300"></span>
+                        <span class="block w-6 h-0.5 bg-gray-700 transition-all duration-300"></span>
+                    </button>
                 </div>
             </div>
-            <div class="-mr-2 flex md:hidden">
-                <button type="button" class="bg-white inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-blue-600 hover:bg-gray-100 focus:outline-none">
-                    <span class="sr-only">Open main menu</span>
-                    <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
-                </button>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="mobile-menu md:hidden bg-white border-t border-gray-200">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="#about" class="text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">About</a>
+                <a href="#services" class="text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">Services</a>
+                <a href="#history" class="text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">Our Journey</a>
+                <a href="#contact" class="text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">Contact</a>
+                <div class="pt-4">
+                    <a href="#contact" class="gradient-btn w-full text-center block">Sign in / Sign up</a>
+                </div>
             </div>
         </div>
-    </div>
-</nav>
+    </nav>
 
 
     <!-- Hero Section -->
@@ -888,70 +952,59 @@
 
 
 
-    <script>
-
-        // Simple animation trigger on scroll
-
-        document.addEventListener('DOMContentLoaded', function () {
-
-            const animateElements = document.querySelectorAll('.animate__animated');
-
-
-
-            const observer = new IntersectionObserver((entries) => {
-
-                entries.forEach(entry => {
-
-                    if (entry.isIntersecting) {
-
-                        const animation = entry.target.getAttribute('data-wow-delay') || '';
-
-                        entry.target.style.animationDelay = animation;
-
-                        entry.target.classList.add('animate__fadeInUp');
-
-                        observer.unobserve(entry.target);
-
-                    }
-
-                });
-
-            }, {
-
-                threshold: 0.1
-
-            });
-
-
-
-            animateElements.forEach(element => {
-
-                observer.observe(element);
-
-            });
-
-
-
-            // Smooth scrolling for anchor links
-
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-
-                anchor.addEventListener('click', function (e) {
-
-                    e.preventDefault();
-
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-
-                        behavior: 'smooth'
-
-                    });
-
-                });
-
-            });
-
+     <script>
+        // Mobile menu functionality
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', function() {
+            mobileMenu.classList.toggle('active');
+            mobileMenuButton.classList.toggle('hamburger-active');
         });
-
+        
+        // Close mobile menu when clicking on a link
+        const mobileLinks = document.querySelectorAll('#mobile-menu a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                mobileMenuButton.classList.remove('hamburger-active');
+            });
+        });
+        
+        // Simple animation trigger on scroll
+        document.addEventListener('DOMContentLoaded', function () {
+            const animateElements = document.querySelectorAll('.animate__animated');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const animation = entry.target.getAttribute('data-wow-delay') || '';
+                        entry.target.style.animationDelay = animation;
+                        entry.target.classList.add('animate__fadeInUp');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            animateElements.forEach(element => {
+                observer.observe(element);
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
     </script>
 
 </body>
