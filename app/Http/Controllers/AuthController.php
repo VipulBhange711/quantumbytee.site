@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
@@ -13,6 +16,10 @@ class AuthController extends Controller
     public function showLoginForm()
     {
         return view('auth.login');
+    }
+    public function showRegisterForm()
+    {
+        return view('auth.register');
     }
 
     /**
@@ -54,6 +61,48 @@ class AuthController extends Controller
     return back()->withErrors([
         'email' => 'Invalid credentials or role mismatch.',
     ])->withInput();
+}
+ public function register(Request $request)
+{
+
+
+    // Validation
+    $validator = Validator::make($request->all(), [
+    'fname'      => 'required|string|max:50',
+    'lname'      => 'required|string|max:50',
+    'email'      => 'required|email|unique:users,email',
+    'password'   => 'required|min:6',
+    'cpassword'  => 'required|same:password',
+], [
+    'fname.required'     => 'First name is required.',
+    'lname.required'     => 'Last name is required.',
+    'email.required'     => 'Email address is required.',
+    'email.email'        => 'Enter a valid email address.',
+    'email.unique'       => 'This email is already registered.',
+    'password.required'  => 'Password is required.',
+    'password.min'       => 'Password must be at least 6 characters.',
+    'cpassword.required' => 'Confirm password is required.',
+    'cpassword.same'     => 'Confirm password must match the password.',
+]);
+
+    if ($validator->fails()) {
+        return redirect()->back()
+            ->withErrors($validator)
+            ->withInput();
+    }
+
+    // Create user with default role student
+    $user = User::create([
+        'name'    => $request->fname." ".$request->lname,
+        'email'    => $request->email,
+        'password' => Hash::make($request->password),
+        'role'     => 'student', // 👈 default role
+    ]);
+
+    // Auto login
+    auth()->login($user);
+
+    return redirect()->route('login')->with('success', 'Registration successful!');
 }
 
 

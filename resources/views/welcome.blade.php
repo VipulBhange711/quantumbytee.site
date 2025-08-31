@@ -152,7 +152,7 @@
 
                 <div class="hidden md:block">
                     <div class="ml-4 flex items-center md:ml-6">
-                        <a href="#contact" class="gradient-btn">Sign in / Sign up</a>
+                        <a href="{{route('login')}}" class="gradient-btn">Sign in / Sign up</a>
                     </div>
                 </div>
 
@@ -182,7 +182,7 @@
                 <a href="#contact"
                     class="text-gray-700 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">Contact</a>
                 <div class="pt-4">
-                    <a href="#contact" class="gradient-btn w-full text-center block">Sign in / Sign up</a>
+                    <a href="{{route('login')}}" class="gradient-btn w-full text-center block">Sign in / Sign up</a>
                 </div>
             </div>
         </div>

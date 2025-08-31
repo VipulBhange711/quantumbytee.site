@@ -15,6 +15,8 @@ Route::get('/me', function () {
 
 Route::get('/melogin', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
+Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
+Route::post('/register', [AuthController::class, 'register'])->name('register.submit');
 
 // Logout
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
@@ -26,8 +28,6 @@ Route::middleware(['auth', 'role:admin'])->get('/admin/dashboard', fn() => "Welc
 Route::middleware(['auth', 'role:superadmin'])->get('/superadmin/dashboard', fn() => "Welcome Super Admin")->name('superadmin.dashboard');
 
 
-Route::get('/register', function () {
-    return view('auth.register');
-});
+
 
 
